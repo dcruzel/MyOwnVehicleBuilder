@@ -2,12 +2,12 @@
 import Vehicle from './Vehicle.js';
 import Wheel from './Wheel.js';
 
-// The Motorbike class should extend the Vehicle class
+// The Motorbike class extends the Vehicle class
 class Motorbike extends Vehicle{
 
-  // Declare properties of the Motorbike class
-  // The properties should include vin, color, make, model, year, weight, top speed, and wheels
-  // The types should be as follows: vin (string), color (string), make (string), model (string), 
+  // Declares properties of the Motorbike class
+  // The properties include vin, color, make, model, year, weight, top speed, and wheels
+  // The types are as follows: vin (string), color (string), make (string), model (string), 
   // year (number), weight (number), topSpeed (number), wheels (Wheel[])
   vin: string; 
   color: string; 
@@ -18,20 +18,20 @@ class Motorbike extends Vehicle{
   topSpeed: number;
   wheels: Wheel[];
 
-  // Create a constructor that accepts the properties of the Motorbike class 
+  // The constructor accepts the properties of the Motorbike class 
   constructor(
-    vin: string; 
-    color: string; 
-    make: string;
-    model: string; 
-    year: number;
-    weight: number;
-    topSpeed: number;
-    wheels: Wheel[];
+    vin: string, 
+    color: string, 
+    make: string,
+    model: string, 
+    year: number,
+    weight: number,
+    topSpeed: number,
+    wheels: Wheel[]
   ){
-    //The constructor should call the constructor of the parent class, Vehicle
+    //The constructor calls the constructor of the parent class, Vehicle
     super();
-    //The constructor should initialize the properties of the Motorbike class
+    //The constructor initializes the properties of the Motorbike class
     this.vin=vin; 
     this.color=color; 
     this.make=make;
@@ -39,24 +39,24 @@ class Motorbike extends Vehicle{
     this.year=year;
     this.weight=weight;
     this.topSpeed=topSpeed;
-    //The constructor should check if the wheels array has 2 elements and create 2 new default Wheel objects if it does not
+    //The constructor checks if the wheels array has 2 elements and create 2 new default Wheel objects if it does not
     if(wheels.length!==2){
       this.wheels=[new Wheel(), new Wheel()];
     }else{
       this.wheels=wheels;
     }
   }
-  // Implement the wheelie method
+  // Implements the wheelie method
   theWheelieMethod():void{
-    // The method should log the message "Motorbike [make] [model] is doing a wheelie!"
+    // The method logs the message "Motorbike [make] [model] is doing a wheelie!"
     console.log(`Motorbike ${this.make} ${this.model} is doing a wheelie!`);
   }
   // Override the printDetails method from the Vehicle class
   override printDetails(): void {
-    //The method should call the printDetails method of the parent class
+    //The method calls the printDetails method of the parent class
     super.printDetails();
-    //The method should log the details of the Motorbike
-    //The details should include the VIN, make, model, year, weight, top speed, color, and wheels
+    //The method logs the details of the Motorbike
+    //The details includes the VIN, make, model, year, weight, top speed, and color
     console.log(`VIN: ${this.vin}`);
     console.log(`Color: ${this.color}`);
     console.log(`Make: ${this.make}`);
