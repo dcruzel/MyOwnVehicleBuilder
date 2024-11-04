@@ -119,9 +119,9 @@ class Cli {
           answers.color,
           answers.make,
           answers.model,
-          answers.year,
-          answers.weight,
-          answers.topSpeed,
+          Number(answers.year),
+          Number(answers.weight),
+          Number(answers.topSpeed),
           []
         );
         // push the car to the vehicles array
@@ -181,11 +181,11 @@ class Cli {
           answers.color,
           answers.make,
           answers.model,
-          answers.year,
-          answers.weight,
-          answers.topSpeed,
+          Number(answers.year),
+          Number(answers.weight),
+          Number(answers.topSpeed),
           [],
-          answers.towingCapacity,
+          Number(answers.towingCapacity),
         );
         
         // Pushed the truck to the vehicles array
@@ -260,9 +260,9 @@ class Cli {
           answers.color,
           answers.make,
           answers.model,
-          answers.year,
-          answers.weight,
-          answers.topSpeed,
+          Number(answers.year),
+          Number(answers.weight),
+          Number(answers.topSpeed),
           []
         );
         // Push the motorbike to the vehicles array
@@ -291,7 +291,7 @@ class Cli {
           }),
         },
       ])
-      .then((answers:Vehicle) => {
+      .then((answers:{vehicleToTow: (Car|Motorbike|Truck)}) => {
         // Check if the selected vehicle is the truck
         if(answers instanceof Truck){
           // If it is, log that the truck cannot tow itself then perform actions on the 
@@ -300,7 +300,7 @@ class Cli {
         }else{
           // If it is not, tow the selected vehicle then perform actions on the truck 
           //to allow the user to select another action
-          truck.tow(truck);
+          truck.tow(answers.vehicleToTow);
         }
       });
   }
@@ -323,9 +323,9 @@ class Cli {
             'Turn right',
             'Turn left',
             'Reverse',
-            'Select or create another vehicle',
             'Tow',
             'Wheelie',
+            'Select or create another vehicle',
             'Exit',
           ],
         },
@@ -391,20 +391,30 @@ class Cli {
         } else if (answers.action === 'Tow'){
         // To perform the tow action only if the selected vehicle is a truck. 
         // Call the findVehicleToTow method to find a vehicle to tow and pass the selected truck as an argument. 
-        // After calling the findVehicleToTow method, you will need to return to avoid instantly 
-        // calling the performActions method again since findVehicleToTow is asynchronous.
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
-              this.findVehicleToTow(this.vehicles[i]);
+              if(this.vehicles[i] instanceof Truck){
+                let truckchoice = new Truck(this.vehicles[i].vin, this.vehicles[i].color, this.vehicles[i].make, this.vehicles[i].model, 
+                  this.vehicles[i].year, this.vehicles[i].weight, this.vehicles[i].topSpeed, this.vehicles[i].wheels, this.vehicles[i].weight);
+                this.findVehicleToTow(truckchoice);
+              }
+              
             }
           }
+          // After calling the findVehicleToTow method, you will need to return to avoid instantly 
+          // calling the performActions method again since findVehicleToTow is asynchronous.
+          return;
         } else if (answers.action === 'Wheelie'){
           // To perform the wheelie action only if the selected vehicle 
           // is a motorbike
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
               if(this.vehicles[i] instanceof Motorbike){
-                this.vehicles[i].Motorbike.theWheelieMethod();
+                let motorbikechoice = new Motorbike(this.vehicles[i].vin, this.vehicles[i].color, this.vehicles[i].make, this.vehicles[i].model, 
+                  this.vehicles[i].year, this.vehicles[i].weight, this.vehicles[i].topSpeed, this.vehicles[i].wheels);
+                motorbikechoice.theWheelieMethod();
+              }else{
+                console.log("The vehicle is not a Motorbike; thus, the Wheelie cannot be performed");
               }
             }
           }
