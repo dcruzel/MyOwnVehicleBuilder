@@ -252,7 +252,7 @@ class Cli {
           message: 'Enter Rear Wheel Brand',
         },
       ])
-      .then((answers:Motorbike) => {
+      .then((answers) => {
         // The generateVin method is static and called using the class name Cli
         const motorbike = new Motorbike(
           // Used the answers object to pass the required properties to the Truck constructor
@@ -263,7 +263,7 @@ class Cli {
           Number(answers.year),
           Number(answers.weight),
           Number(answers.topSpeed),
-          []
+          [new Wheel(Number(answers.frontWheelDiameter), answers.frontWheelBrand), new Wheel(Number(answers.rearWheelDiameter), answers.rearWheelBrand)],
         );
         // Push the motorbike to the vehicles array
         this.vehicles.push(motorbike);
@@ -402,8 +402,7 @@ class Cli {
             }
           }
           // After calling the findVehicleToTow method, you will need to return to avoid instantly 
-          // calling the performActions method again since findVehicleToTow is asynchronous.
-          this.startCli();
+          // calling the performActions method again since findVehicleToTow is asynchronous
           return;
         } else if (answers.action === 'Wheelie'){
           // To perform the wheelie action only if the selected vehicle 
