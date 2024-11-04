@@ -403,6 +403,7 @@ class Cli {
           }
           // After calling the findVehicleToTow method, you will need to return to avoid instantly 
           // calling the performActions method again since findVehicleToTow is asynchronous.
+          this.startCli();
           return;
         } else if (answers.action === 'Wheelie'){
           // To perform the wheelie action only if the selected vehicle 

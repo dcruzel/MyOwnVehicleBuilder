@@ -5,9 +5,17 @@ class Wheel {
   private tireBrand: string;
 
   // Constructor for the Wheel class
-  constructor(diameter: number = 18, tireBrand: string = "GoodYear") {
-    this.diameter = diameter;
-    this.tireBrand = tireBrand;
+  constructor(diameter: number, tireBrand: string) {
+    if(diameter===0){
+      this.diameter = 18;
+    }else{
+      this.diameter = diameter;
+    }
+    if(tireBrand===""){
+      this.tireBrand="GoodYear";
+    }else{
+      this.tireBrand = tireBrand;
+    }
   }
 
   // Getter methods for the properties of the Wheel class

@@ -41,7 +41,7 @@ class Motorbike extends Vehicle{
     this.topSpeed=topSpeed;
     //The constructor checks if the wheels array has 2 elements and create 2 new default Wheel objects if it does not
     if(wheels.length!==2){
-      this.wheels=[new Wheel(), new Wheel()];
+      this.wheels=[new Wheel(0, ""), new Wheel(0, "")];
     }else{
       this.wheels=wheels;
     }
